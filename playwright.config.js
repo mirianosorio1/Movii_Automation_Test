@@ -23,7 +23,10 @@ export default defineConfig({
   timeout: 90000,
   // Las aserciones expect() esperan hasta 15 segundos
   expect: { timeout: 15000 },
-  reporter: 'html',
+  reporter: [
+    ['html'],
+    ['allure-playwright', { outputFolder: 'allure-results' }],
+  ],
   use: {
     // page.goto() y navegaciones esperan hasta 60 segundos
     navigationTimeout: 60000,

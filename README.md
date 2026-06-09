@@ -80,49 +80,102 @@ npx playwright show-report
 
 ---
 
+## Resumen de ejecución
+
+```
+44 tests · 42 passed · 2 skipped · 0 failed
+Navegadores: Chromium + Firefox
+```
+
+| Estado | Significado |
+|---|---|
+| ✅ Passed | El test ejecutó y la aserción fue correcta |
+| `x` Expected failure | El test falla intencionalmente — defecto conocido documentado |
+| `-` Skipped | Bloqueado por un factor externo (reCAPTCHA) |
+
+---
+
 ## Casos de prueba
 
 ### Flujo principal — Persona → Promociones
 
 | ID | Descripción | Estado |
 |---|---|---|
-| CP-F01 | La pantalla inicial muestra los botones Persona y Empresa | Automatizado |
-| CP-F02 | Al hacer clic en Persona carga el home con el menú | Automatizado |
-| CP-F03 | Al hacer clic en PROMOCIONES redirige a beneficios.movii.com.co | Automatizado |
-| CP-F04 | Visualización de la página MOVIDO$ | Automatizado |
+| CP-F01 | La pantalla inicial muestra los botones Persona y Empresa | ✅ Automatizado |
+| CP-F02 | Al hacer clic en Persona carga el home con el menú | ✅ Automatizado |
+| CP-F03 | Al hacer clic en PROMOCIONES redirige a beneficios.movii.com.co | ✅ Automatizado |
+| CP-F04 | Visualización de la página MOVIDO$ | ✅ Automatizado |
+
+### Header y enlaces — Club MOVIDO$
+
+| ID | Descripción | Estado |
+|---|---|---|
+| CP-F07 | Botón DESCARGA MOVii tiene un enlace válido (href no vacío ni `#`) | ✅ Automatizado |
+| CP-F08 | Enlace "Centro de ayuda" apunta a freshdesk.com | ✅ Automatizado |
+| CP-F09 | Enlace "#SomosMOVii" apunta a /somos-movii/ | ✅ Automatizado |
+
+### Carrusel — Club MOVIDO$
+
+| ID | Descripción | Estado |
+|---|---|---|
+| CP-F05 | Carrusel avanza con la flecha siguiente (contador N/6 incrementa) | ✅ Automatizado |
+| CP-F06 | Carrusel retrocede con la flecha anterior (contador N/6 disminuye) | ✅ Automatizado |
+
+### Tarjetas de promociones — Club MOVIDO$
+
+| ID | Descripción | Estado |
+|---|---|---|
+| CP-F11 | Imágenes y banners de promociones cargan sin errores | ✅ Automatizado |
+| CP-F12 | Listado de promociones se muestra con títulos e imágenes visibles | ✅ Automatizado |
 
 ### Filtros por categoría — Club MOVIDO$
 
 | ID | Descripción | Estado |
 |---|---|---|
-| CP-F13 | Filtro "Todas las entradas" muestra todo el contenido | Automatizado |
-| CP-F14 | Filtro por categoría Restaurantes | Automatizado |
-| CP-F15 | Filtro por categoría Entretenimiento | Automatizado |
-| CP-F16 | Filtro por categoría Supermercados | Automatizado |
-| CP-F17 | Filtro por categoría Droguerías | Automatizado |
+| CP-F13 | Filtro "Todas las entradas" restaura la vista completa | ✅ Automatizado |
+| CP-F14 | Filtro por categoría Restaurantes | ✅ Automatizado |
+| CP-F15 | Filtro por categoría Entretenimiento | ✅ Automatizado |
+| CP-F16 | Filtro por categoría Supermercados | ✅ Automatizado |
+| CP-F17 | Filtro por categoría Droguerías | ✅ Automatizado |
+
+### Desplegable Más — Club MOVIDO$
+
+| ID | Descripción | Estado |
+|---|---|---|
+| CP-F18 | Desplegable "Más ▾" muestra categorías adicionales al hacer clic | ✅ Automatizado |
+
+### Responsividad móvil — Club MOVIDO$
+
+| ID | Descripción | Estado |
+|---|---|---|
+| CP-F10 | La página se adapta a viewport 375×812 sin overflow horizontal | ⚠️ Defecto conocido |
 
 ### Buscador — Club MOVIDO$
 
 | ID | Descripción | Estado |
 |---|---|---|
-| CP-F20 | Buscar un término muestra la URL con el parámetro de búsqueda | Automatizado |
+| CP-F20 | Buscar un término muestra resultados relacionados | ✅ Automatizado |
 
 ### Detalle de promoción — Club MOVIDO$
 
 | ID | Descripción | Estado |
 |---|---|---|
-| CP-F22 | Apertura del detalle desde una tarjeta de promoción | Automatizado |
+| CP-F22 | Apertura del detalle desde una tarjeta de promoción | ✅ Automatizado |
 
 ### Formulario de suscripción — Club MOVIDO$
 
 | ID | Descripción | Estado |
 |---|---|---|
-| CP-F23 | Suscripción con email válido muestra confirmación | Bloqueado |
-| CP-F24 | Validación de email inválido o campo vacío en suscripción | Automatizado |
+| CP-F23 | Suscripción con email válido muestra confirmación | ⛔ Bloqueado |
+| CP-F24 | Validación de email inválido o campo vacío en suscripción | ✅ Automatizado |
 
 ---
 
-## Bloqueadores conocidos
+## Defectos y bloqueadores conocidos
+
+**CP-F10 — Overflow horizontal en viewport móvil 375×812**
+
+Al cargar `beneficios.movii.com.co` en viewport de 375×812 px (iPhone SE), `document.body.scrollWidth > window.innerWidth` retorna `true` en Chromium y Firefox, indicando que el contenido desborda horizontalmente. El test está marcado con `test.fail()` para documentar el defecto: la suite sigue en verde (exit 0) pero reporta "expected failure" hasta que el equipo de desarrollo corrija el layout.
 
 **CP-F23 — reCAPTCHA en el formulario de suscripción**
 
