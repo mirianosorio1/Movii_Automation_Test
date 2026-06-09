@@ -141,8 +141,6 @@ Durante el desarrollo de este proyecto se utilizó **Claude (Anthropic)** como a
 - **Diseño de la arquitectura:** Se consultó el patrón Page Object Model y cómo estructurar las clases `HomePage` y `BeneficiosPage` para este caso específico.
 - **Selección de localizadores:** Ante la imposibilidad de usar selectores estándar (`article`, `h2`, `button[type="submit"]`) en el sitio Wix/React de beneficios.movii.com.co, la IA ayudó a identificar alternativas (`getByRole`, `getByTestId`, `locator('[aria-label]')`) y a explicar por qué los selectores originales fallaban.
 - **Diagnóstico de errores:** La IA analizó los mensajes de error de Playwright (timeouts, elementos ocultos, inputs que no responden a eventos sintéticos) y propuso soluciones fundamentadas.
-- **Documentación de bloqueadores:** La IA ayudó a redactar el criterio técnico para marcar CP-F23 como bloqueado por reCAPTCHA y documentar la justificación con `test.skip()`.
-- **Configuración de Playwright:** Ajuste de `workers`, `timeout`, `navigationTimeout` y `retries` en `playwright.config.js` para estabilizar la ejecución contra sitios externos lentos.
 
 **Lo que NO hizo la IA:**
 
