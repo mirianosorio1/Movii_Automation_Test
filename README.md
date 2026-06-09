@@ -132,6 +132,26 @@ Para desbloquearlo en un entorno controlado se requieren las **test keys de reCA
 
 ---
 
+## Uso de inteligencia artificial
+
+Durante el desarrollo de este proyecto se utilizó **Claude (Anthropic)** como asistente de programación a través de Claude Code. El uso fue declarado y se enmarca en las condiciones de la prueba técnica.
+
+**Áreas donde se aplicó IA:**
+
+- **Diseño de la arquitectura:** Se consultó el patrón Page Object Model y cómo estructurar las clases `HomePage` y `BeneficiosPage` para este caso específico.
+- **Selección de localizadores:** Ante la imposibilidad de usar selectores estándar (`article`, `h2`, `button[type="submit"]`) en el sitio Wix/React de beneficios.movii.com.co, la IA ayudó a identificar alternativas (`getByRole`, `getByTestId`, `locator('[aria-label]')`) y a explicar por qué los selectores originales fallaban.
+- **Diagnóstico de errores:** La IA analizó los mensajes de error de Playwright (timeouts, elementos ocultos, inputs que no responden a eventos sintéticos) y propuso soluciones fundamentadas.
+- **Documentación de bloqueadores:** La IA ayudó a redactar el criterio técnico para marcar CP-F23 como bloqueado por reCAPTCHA y documentar la justificación con `test.skip()`.
+- **Configuración de Playwright:** Ajuste de `workers`, `timeout`, `navigationTimeout` y `retries` en `playwright.config.js` para estabilizar la ejecución contra sitios externos lentos.
+
+**Lo que NO hizo la IA:**
+
+- La exploración del sitio, la identificación de los flujos y la decisión sobre qué casos automatizar fueron realizadas por la persona a cargo de la prueba.
+- Los selectores finales que funcionaron se validaron con **Playwright Codegen** ejecutado directamente sobre el navegador, no generados por la IA sin verificación.
+- Cada solución propuesta fue revisada, probada y ajustada por la persona, no aplicada de forma automática.
+
+---
+
 ## Decisiones técnicas
 
 - **`workers: 1`** — El sitio movii.com.co es lento. Ejecutar tests en paralelo causa timeouts. Con 1 worker los tests son más estables.
