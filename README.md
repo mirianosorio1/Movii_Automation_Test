@@ -33,17 +33,28 @@ Se usa el patrón **Page Object Model (POM)**: cada página tiene su propia clas
 
 ---
 
+## Requisitos previos
+
+- [Node.js](https://nodejs.org/) v18 o superior
+- [Git](https://git-scm.com/downloads/win) — después de instalarlo, **abrir una terminal nueva**
+
+---
+
 ## Instalación
 
-```bash
+Abrir **PowerShell** o **Símbolo del sistema** y ejecutar:
+
+```powershell
 # 1. Clonar el repositorio
 git clone https://github.com/mirianosorio1/Movii_Automation_Test.git
+
+# 2. Entrar a la carpeta del proyecto
 cd Movii_Automation_Test
 
-# 2. Instalar dependencias
+# 3. Instalar dependencias
 npm install
 
-# 3. Instalar navegadores de Playwright
+# 4. Instalar navegadores de Playwright
 npx playwright install
 ```
 
@@ -51,7 +62,9 @@ npx playwright install
 
 ## Ejecución
 
-```bash
+Desde la carpeta del proyecto (`cd Movii_Automation_Test`):
+
+```powershell
 # Ejecutar todos los tests
 npx playwright test
 
